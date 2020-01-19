@@ -71,10 +71,15 @@ $calc.onclick = calcAll;
 // NodeList (you can create a node list using querySelectorAll) you can use array methods such as forEach
 // NodeListhttps://developer.mozilla.org/en-US/docs/Web/API/NodeList
 
-let deleteBtnCollection = document.getElementsByClassName('btn btn-delete');    // Step 1: make a collection of all delete buttons
-for(let i = 0; i < deleteBtnCollection.length;i++){    // Step 2: loop through collection to add onclick event that will remove the product
-  deleteBtnCollection[i].onclick = removeProduct; 
+
+function addDeleteListener(){
+  let deleteBtnCollection = document.getElementsByClassName('btn btn-delete');    // Step 1: make a collection of all delete buttons
+  for(let i = 0; i < deleteBtnCollection.length;i++){    // Step 2: loop through collection to add onclick event that will remove the product
+    deleteBtnCollection[i].onclick = removeProduct; 
+  }
 }
+
+addDeleteListener()
 
 function removeProduct(event) { // Step 3: create the function to remove the row (i.e. the product) where delect was clicked
   console.log("what", typeof event.currentTarget)
@@ -84,3 +89,38 @@ function removeProduct(event) { // Step 3: create the function to remove the row
   console.log("What is the parent of the parent of the current target: ", event.currentTarget.parentElement.parentElement);
   event.currentTarget.parentElement.parentElement.remove(); 
  } 
+
+ 
+ let createBtn = document.querySelector("#create")
+ 
+ createBtn.onclick = createRow
+ 
+ function createRow(){
+   let productName = document.querySelector("#cart > tfoot > tr > td:nth-child(1) > input[type=text]").value 
+   let price = document.querySelector("#cart > tfoot > tr > td:nth-child(2) > input[type=number]").value
+   let rowHTML = `<tr class="product">
+   <td class="name">
+     <span>${productName}</span>
+   </td>
+
+   <td class="pu">$<span>${price}</span></td>
+
+   <td class="qty">
+     <label>
+       <input type="number" value="0" min="0" />
+     </label>
+   </td>
+
+   <td class="subtot">$<span>0</span></td>
+
+   <td class="rm">
+     <button class="btn btn-delete">Delete</button>
+   </td>
+   </tr>`
+
+   
+   document.querySelector("#cart > tbody").innerHTML += rowHTML
+
+  addDeleteListener()
+
+ }
