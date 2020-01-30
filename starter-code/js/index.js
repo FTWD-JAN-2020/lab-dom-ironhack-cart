@@ -48,7 +48,7 @@ function calcAll() {
 $calc.onclick = calcAll;
 
 /**
- * Steps
+ * Steps for iteration 4
  * 1. make a collection of all delete buttons
  * 2. loop through collection and add an onclick event that will call a function removeProduct() 
  *    (or whatever you want to name the fucntion) that will remove the whole row (i.e. the product)
